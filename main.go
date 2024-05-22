@@ -81,7 +81,10 @@ func main() {
 	api.Get("/socket/:id", websocket.New(communication.SendMessage))
 
 	// Start server
-	err = router.Listen(":7000")
+
+	port := os.Getenv("PORT")
+
+	err = router.Listen("0.0.0.0:" + port)
 	if err != nil {
 		log.Fatalf("Error while starting server: \n%v\n", err)
 	}
